@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Final Exam Countdown</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+    }
+    h1 {
+        margin-bottom: 20px;
+    }
+    #countdown {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Entrance Exam Countdown</h1>
+<div id="countdown">Loading...</div>
+
+<script>
+    const examDate = new Date("May 30, 2026 08:00:00").getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = examDate - now;
+
+        if (difference <= 0) {
+            document.getElementById("countdown").innerHTML = "It's Exam Day.";
+            clearInterval(interval);
+            return;
+        }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((difference / (1000 * 60)) % 60);
+        const seconds = Math.floor((difference / 1000) % 60);
+
+        document.getElementById("countdown").innerHTML =
+            days + "d " +
+            hours + "h " +
+            minutes + "m " +
+            seconds + "s ";
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+
+</body>
+</html>
